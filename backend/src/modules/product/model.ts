@@ -1,5 +1,4 @@
 import { Model, DataTypes, BelongsToSetAssociationMixin } from 'sequelize';
-import Subcategory from '../subCategory/model';
 import sequelize from '../../config/database';
 
 class Product extends Model {
@@ -17,7 +16,7 @@ class Product extends Model {
   public readonly updatedAt!: Date;
 
   // Other model methods and associations go here
-  public setCategory!: BelongsToSetAssociationMixin<Subcategory, number>;
+ // public setCategory!: BelongsToSetAssociationMixin<number>;
 
 }
 

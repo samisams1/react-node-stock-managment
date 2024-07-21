@@ -2,10 +2,10 @@
   "development": {
     "username": "postgres",
     "password": "samisams",
-    "database": "nilesoft_autoepcrepair",
+    "database": "stock",
     "host": "localhost",
     "dialect": "postgres",
-    "schema": "autoepcrepair"
+    "schema": "stock_schema"
   },
   "test": {
     "username": "your_test_username",
@@ -13,7 +13,7 @@
     "database": "your_test_database",
     "host": "localhost",
     "dialect": "postgres",
-    "schema": "your_schema_name"
+    "schema": "stock_schema"
   },
   "production": {
     "username": "your_production_username",
@@ -21,7 +21,7 @@
     "database": "your_production_database",
     "host": "localhost",
     "dialect": "postgres",
-    "schema": "your_schema_name"
+    "schema": "stock_schema"
   }
 }
 
