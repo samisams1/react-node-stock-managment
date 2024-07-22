@@ -96,7 +96,7 @@ const SmallImage = styled.img`
             <Image src={HesstonImage} alt="sams" />
           </ImageColumn>
           <CatalogTypeContainer>
-            <CatalogType>Type of catalogue: spare parts catalog</CatalogType>
+            <CatalogType>This is samson mamushet</CatalogType>
             <CatalogType>Type of catalogue: spare parts catalog</CatalogType>
             <CatalogType>Type of catalogue: spare parts catalog</CatalogType>
             <CatalogType>Like  dis like</CatalogType>
