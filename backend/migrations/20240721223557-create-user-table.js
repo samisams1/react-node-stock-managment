@@ -29,6 +29,8 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+    },{
+      schema: 'stock_schema',
     });
   },
 

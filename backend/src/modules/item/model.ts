@@ -1,6 +1,5 @@
 import { Model, DataTypes, BelongsToSetAssociationMixin } from 'sequelize';
 import sequelize from '../../config/database';
-
 class Item extends Model {
   public id!: number;
   public item_code!: string;
@@ -39,95 +38,95 @@ Item.init(
     },
     item_code: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     partNumId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     item_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     brand_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     mark: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     model: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     manufacturer: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     manufacturer_date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     expiry_date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     locatedAt: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     category_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     group_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     measurement: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     min_qty: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     low_qty: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     max_qty: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     price_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     item_image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     item_description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     item_added: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     item_time: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     item_status: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     item_active: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

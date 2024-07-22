@@ -4,7 +4,8 @@ import cors from 'cors'; // Import the cors package
 
 import userRoutes from './modules/user/routes';
 import authoRoutes from './modules/auth/routes';
-import ProductRoutes from './modules/product/routes';
+import ItemRoutes from './modules/item/routes';
+
 dotenv.config();
 
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.static('uploads'))
 // Register routes
 app.use('/users', userRoutes);
 app.use('/auth', authoRoutes);
-app.use('/product', ProductRoutes);
+app.use('/item', ItemRoutes);
 app.use((err: any, req: Request, res: Response, next: any) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });

@@ -21,14 +21,14 @@ const storage = multer.diskStorage({
 // Create a multer instance with the configured storage
 const upload = multer({ storage });
 
-router.get('/', ItemController.getAllItems);
+router.get('/items', ItemController.getAllItems);
 
 router.post('/create', upload.single('imageurl'), (req, res) => {
   // Log the data received from the client to the console
-  console.log(req.body);
+ // console.log(req.body);
 
   // Continue with the rest of your logic
- // ItemController.createProduct(req, res);
+  ItemController.createProduct(req, res);
 });
 
 export default router;
