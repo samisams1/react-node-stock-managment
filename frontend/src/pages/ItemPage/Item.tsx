@@ -1,114 +1,108 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import HesstonImage from '../../assets/screen/hesston-epsilon.png';
-import { ItemPageProps } from './ItemPage';
+import React, { useState, useEffect } from 'react';
+import { Item, fetchItems } from '../../redux/actions/itemActions';
+import {
+  TableWrapper,
+  TableHeader,
+  TableHeaderCell,
+  TableBody,
+  TableCell,
+  ActionCell,
+  ActionButton,
+  CheckboxCell,
+  CheckboxInput,
+} from './ItemTableStyles';
 
-const WrapperItem = styled.div`
-  background-color: #f2f2f2;
-  border: 2px solid #030E4F; /* Primary color */
-  margin-bottom: 16px;
-  margin-top: 16px;
-`;
+const ItemTable: React.FC = () => {
+  const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [selectAll, setSelectAll] = useState(false);
 
-const Heading = styled.div`
-  background-color: #030E4F;
-  color: #fff;
-`;
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchItems();
+      setItems(data);
+    };
+    fetchData();
+  }, []);
 
-const FirstRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start; /* Start from top */
-  margin-bottom: 8px;
-`;
+  const handleCheckboxChange = (item: Item) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(selectedItems.filter((i) => i.id !== item.id));
+    } else {
+      setSelectedItems([...selectedItems, item]);
+    }
+  };
 
-const FirstColumn = styled.div`
-  flex: 1; /* Equal width */
-  font-weight: bold;
-  color: #333;
-`;
+  const handleSelectAllChange = () => {
+    setSelectAll(!selectAll);
+    if (!selectAll) {
+      setSelectedItems(items);
+    } else {
+      setSelectedItems([]);
+    }
+  };
 
-const SecondColumn = styled.div`
-  flex: 1; /* Equal width */
-  display: flex;
-  flex-direction: column;
-`;
+  const handleDeleteClick = (item: Item) => {
+    setSelectedItems([item]);
+    setShowDeleteConfirm(true);
+  };
 
-const CatalogTypeContainer = styled.div`
-  border: 2px solid #fff;
-  padding: 8px;
-  margin-top: 8px;
-  background-color: #fff;
-`;
+  const handleEditClick = (item: Item) => {
+    // Add your edit logic here
+    console.log('Edit item:', item);
+  };
 
-const CatalogType = styled.p`
-  margin: 5px;
-  color: #333;
-  padding : 5px;
-   background-color: #f2f2f2;
-`;
-
-const ImageColumn = styled.div<{ isMaximized: boolean }>`
-  flex: 1; /* Equal width */
-  font-style: italic;
-  color: #777;
-  cursor: pointer;
-  max-height: ${({ isMaximized }) => (isMaximized ? 'none' : '200px')};
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-`;
-
-const ImageSlideShow = styled.div`
-  /* Styles for the image slideshow container if needed */
-`;
-
-const Image = styled.img`
-  width: 100%;
-`;
-
-const SmallImage = styled.img`
-  width: 300px;
-  padding: 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-
-  const Item: React.FC<ItemPageProps> = ({ categoryId }) => {
-  const [isMaximized, setIsMaximized] = useState(false);
-
-  const handleImageClick = () => {
-    setIsMaximized(!isMaximized);
+  const handleViewClick = (item: Item) => {
+    // Add your view logic here
+    console.log('View item:', item);
   };
 
   return (
-    <WrapperItem>
-      <Heading>Home / Heavy Technics + Repair / Hesston Parts & Workshop Manuals by Massey Ferguson | AGCO 01/2020</Heading>
-      <FirstRow>
-        <FirstColumn>
-          {/* Content of the first column */}
-          {categoryId}
-        </FirstColumn>
-        <SecondColumn>
-          <ImageColumn isMaximized={isMaximized} onClick={handleImageClick}>
-            <Image src={HesstonImage} alt="sams" />
-          </ImageColumn>
-          <CatalogTypeContainer>
-            <CatalogType>This is samson mamushet</CatalogType>
-            <CatalogType>Type of catalogue: spare parts catalog</CatalogType>
-            <CatalogType>Type of catalogue: spare parts catalog</CatalogType>
-            <CatalogType>Like  dis like</CatalogType>
-          </CatalogTypeContainer>
-        </SecondColumn>
-      </FirstRow>
-      <ImageSlideShow>
-        {/* Image slideshow content */}
-        <SmallImage src={HesstonImage} alt="sams" />
-      </ImageSlideShow>
-    </WrapperItem>
+    <div>
+      search
+    <TableWrapper>
+      <TableHeader>
+        
+        <tr>
+          <TableHeaderCell>ID</TableHeaderCell>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Options  <CheckboxInput
+              type="checkbox"
+              checked={selectAll}
+              onChange={handleSelectAllChange}
+            /></TableHeaderCell>
+        </tr>
+      </TableHeader>
+      <TableBody>
+        {items.map((item) => (
+          <tr key={item.id}>
+            <TableCell>{item.item_code}</TableCell>
+            <TableCell>{item.item_name}</TableCell>
+            <ActionCell>
+              <ActionButton onClick={() => handleDeleteClick(item)}>
+                🗑️
+              </ActionButton>
+              <ActionButton onClick={() => handleEditClick(item)}>
+                ✏️
+              </ActionButton>
+              <ActionButton onClick={() => handleViewClick(item)}>
+                👁️
+              </ActionButton>
+              <CheckboxCell>
+                <CheckboxInput
+                  type="checkbox"
+                  checked={selectedItems.includes(item)}
+                  onChange={() => handleCheckboxChange(item)}
+                />
+              </CheckboxCell>
+            </ActionCell>
+          </tr>
+        ))}
+      </TableBody>
+    </TableWrapper>
+    </div>
   );
 };
 
-export default Item;
+export default ItemTable;

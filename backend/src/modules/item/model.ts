@@ -137,5 +137,77 @@ Item.init(
     schema: 'stock_schema',
   }
 );
+class ItemHistory extends Model {
+  public id!:number;
+  public status!:string;
+  
+  public readonly cratedAt!:Date;
+  public readonly updatedAt!:Date;
+  
+  }
+  ItemHistory.init({
+      id:{
+          type:DataTypes.INTEGER,
+          primaryKey:true
+      },
+      status:{
+          type:DataTypes.STRING,
+          allowNull:true
+      }
+  },{
+      sequelize,
+      modelName:'ItemHistory',
+      tableName:'itemHistories',
+      timestamps:true,
+      schema:'stock_schema'
+  })
 
+  class ItemIn extends Model {
+    public id!:number;
+    public status!:string;
+    
+    public readonly cratedAt!:Date;
+    public readonly updatedAt!:Date;
+    
+    }
+    ItemIn.init({
+        id:{
+            type:DataTypes.INTEGER,
+            primaryKey:true
+        },
+        status:{
+            type:DataTypes.STRING,
+            allowNull:true
+        }
+    },{
+        sequelize,
+        modelName:'ItemIn',
+        tableName:'itemIns',
+        timestamps:true,
+        schema:'stock_schema'
+    })
+    class ItemOut extends Model {
+      public id!:number;
+      public status!:string;
+      
+      public readonly cratedAt!:Date;
+      public readonly updatedAt!:Date;
+      
+      }
+      ItemIn.init({
+          id:{
+              type:DataTypes.INTEGER,
+              primaryKey:true
+          },
+          status:{
+              type:DataTypes.STRING,
+              allowNull:true
+          }
+      },{
+          sequelize,
+          modelName:'ItemOut',
+          tableName:'itemOuts',
+          timestamps:true,
+          schema:'stock_schema'
+      })
 export default Item;
