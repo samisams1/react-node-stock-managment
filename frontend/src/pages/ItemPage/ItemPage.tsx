@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { PageHeaderComponent } from '../../layouts/PageHeader';
 import Footer from '../../layouts/Footer/footer';
 import Banner from '../HomePage/Banner';
 import ItemTable from './Item';
 import Button from '../../components/Button/Button';
 import { FaPlus, FaShoppingBasket, FaDownload, FaBoxOpen } from 'react-icons/fa';
+import PageHeaderComponent from '../../layouts/PageHeader';
 
 // Define the theme colors
 const theme = {

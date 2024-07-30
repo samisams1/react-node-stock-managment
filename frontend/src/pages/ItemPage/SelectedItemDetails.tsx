@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Banner from '../HomePage/Banner';
-import { PageHeaderComponent } from '../../layouts/PageHeader';
 import Footer from '../../layouts/Footer/footer';
 import { AiOutlineDelete } from 'react-icons/ai';
+import Navbar from '../../layouts/PageHeader';
 
 const theme = {
   primaryColor: '#030E4F',
@@ -89,7 +89,7 @@ const SelectedItemDetails: React.FC<SelectedItemDetailsProps> = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <PageHeaderComponent />
+        <Navbar/>
       <Banner />
       {data.length > 0 ? (
         <SelectedItemsContainer>

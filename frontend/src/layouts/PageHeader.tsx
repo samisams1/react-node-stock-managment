@@ -1,185 +1,183 @@
-import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import React, { useState } from 'react';  
+import styled from 'styled-components';  
+import { useNavigate } from 'react-router-dom';  
+import {  
+  FaHome, FaShoppingCart, FaStore, FaExchangeAlt, FaClipboardList, FaMoneyBillAlt, FaCog,  
+  FaAngleUp, FaAngleDown, FaUserCircle, FaShippingFast, FaChartLine, FaPeopleArrows,  
+  FaCodeBranch, FaFileImport,  
+} from 'react-icons/fa';  
 
-const theme = {
-  primaryColor: '#030E4F',
-  secondaryColor: '#b4b9db',
-};
+interface LinkProps {  
+  label: string;  
+  href: string;  
+  icon: React.ReactNode;  
+  subMenu?: LinkProps[];  
+}  
+const links: LinkProps[] = [  
+  { label: 'Dashboard', href: '/', icon: <FaHome />},  
+  {  
+    label: 'Shop', href: '/shop', icon: <FaShoppingCart />, subMenu: [  
+      { label: 'Shop Item', href: '/shope-item', icon: <FaClipboardList /> },  
+      { label: 'Item Input', href: '/item-input', icon: <FaUserCircle /> },  
+      { label: 'Item History', href: '/item-history', icon: <FaShippingFast /> },  
+      { label: 'Item Balance', href: '/item-alance', icon: <FaShippingFast /> },  
+      { label: 'Item Balance - All Low in Quantity', href: '/item-low-quantity', icon: <FaShippingFast /> },  
+    ],  
+  },  
+  {  
+    label: 'Store', href: '/store', icon: <FaStore />, subMenu: [  
+      { label: 'Main Branch', href: '/store/inventory', icon: <FaChartLine /> },  
+      { label: 'Request Items', href: '/store/pricing', icon: <FaMoneyBillAlt /> },  
+      { label: 'Manage Request', href: '/store/analytics', icon: <FaChartLine /> }, 
+      { label: 'Low in Quantity', href: '/store/analytics', icon: <FaChartLine /> },  
+    ],  
+  },  
+  {  
+    label: 'Transfer', href: '/transfer', icon: <FaExchangeAlt />, subMenu: [  
+      { label: 'Bank Accounts', href: '/transfer/accounts', icon: <FaUserCircle /> },  
+      { label: 'Transaction History', href: '/transfer/history', icon: <FaClipboardList /> },  
+      { label: 'Transfer Settings', href: '/transfer/settings', icon: <FaCog /> },  
+    ],  
+  },  
+  {  
+    label: 'Request', href: '/request', icon: <FaClipboardList />, subMenu: [  
+      { label: 'Pending Requests', href: '/request/pending', icon: <FaClipboardList /> },  
+      { label: 'Request Templates', href: '/request/templates', icon: <FaCog /> },  
+      { label: 'Request Analytics', href: '/request/analytics', icon: <FaChartLine /> },  
+    ],  
+  },  
+  {  
+    label: 'Purchase', href: '/purchase', icon: <FaMoneyBillAlt />, subMenu: [  
+      { label: 'Purchase Item', href: '/purchase-item', icon: <FaClipboardList /> },  
+      { label: 'Purchase Request', href: '/purchase-request', icon: <FaCog /> },  
+      { label: 'Purchase Info', href: '/purchase-info', icon: <FaChartLine /> },  
+    ],  
+  },  
+  {  
+    label: 'Settings', href: '/settings', icon: <FaCog />, subMenu: [  
+      { label: 'Company Profile', href: '/companyProfile', icon: <FaPeopleArrows /> },  
+      { label: 'User Management', href: '/users', icon: <FaPeopleArrows /> },  
+      { label: 'Branch', href: '/branch', icon: <FaCodeBranch /> },  
+      { label: 'Import From Excel', href: '/import', icon: <FaFileImport /> },  
+    ],  
+  },  
+];  
 
-const PageHeader = styled.div`
-  background-color: ${(props) => props.theme.primaryColor};
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
+const Navbar: React.FC = () => {  
+  const navigate = useNavigate();  
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);  
 
-  span {
-    color: #fff;
-    margin-left: auto;
-    position: relative;
-    padding-right: 16px;
+  const handleSubMenuClick = (href: string, index: number) => {  
+    navigate(href);  
+    setActiveIndex(null); // Close submenu after navigation  
+  };  
 
-    &::after {
-      content: '▼';
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 12px;
-      color: #b4b9db;
-    }
-  }
-`;
+  const toggleSubMenu = (index: number) => {  
+    setActiveIndex(prevIndex => (prevIndex === index ? null : index));  
+  };  
 
-const HamburgerMenu = styled.div`
-  display: none;
-  cursor: pointer;
+  return (  
+    <NavbarContainer>  
+      <NavList>  
+        {links.map((link, index) => (  
+          <NavItem key={index}>  
+            <NavLink  
+              onClick={() => toggleSubMenu(index)}  
+              isActive={activeIndex === index}  
+            >  
+              {link.icon} {link.label}  
+              {link.subMenu && (  
+                activeIndex === index  
+                  ? <FaAngleUp />  
+                  : <FaAngleDown />  
+              )}  
+            </NavLink>  
+            {link.subMenu && (  
+              <SubMenu isActive={activeIndex === index}>  
+                {link.subMenu.map((subLink, subIndex) => (  
+                  <SubMenuItem key={subIndex}>  
+                    <SubMenuLink  
+                      onClick={() => handleSubMenuClick(subLink.href, index)}  
+                    >  
+                      {subLink.icon} {subLink.label}  
+                    </SubMenuLink>  
+                  </SubMenuItem>  
+                ))}  
+              </SubMenu>  
+            )}  
+          </NavItem>  
+        ))}  
+      </NavList>  
+    </NavbarContainer>  
+  );  
+};  
 
-  @media (max-width: 768px) {
-    display: block;
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 9999;
-  }
+const NavbarContainer = styled.nav`  
+  display: flex;  
+  justify-content: center;  
+  background-color: #333;  
+  padding: 1rem 0;  
+`;  
 
-  span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: #fff;
-    margin-bottom: 4px;
-    transition: transform 0.3s ease-in-out;
+const NavList = styled.ul`  
+  list-style-type: none;  
+  margin: 0;  
+  padding: 0;  
+  display: flex;  
+`;  
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-`;
+const NavItem = styled.li`  
+  margin: 0 1rem;  
+  position: relative;  
+`;  
 
-const DrawerContent = styled.div`
-  p {
-    padding: 8px 0;
-    margin: 0;
-    color: #fff;
-    cursor: pointer;
-    border-bottom: 1px solid #ccc;
-    transition: background-color 0.3s ease-in-out;
+const NavLink = styled.a<{ isActive?: boolean }>`  
+  color: ${({ isActive }) => (isActive ? '#ccc' : '#fff')};  
+  text-decoration: none;  
+  font-weight: bold;  
+  cursor: pointer;  
+  display: flex;  
+  align-items: center;  
 
-    &:hover {
-      background-color: #f2f2f2;
-      color: ${(props) => props.theme.secondaryColor};
-    }
+  &:hover {  
+    color: #ccc;  
+  }  
 
-    &.sub-menu {
-      padding-left: 16px;
-      font-weight: bold;
-      color: #fff;
-    }
-  }
-`;
+  svg {  
+    margin-right: 0.5rem;  
+  }  
+`;  
 
-const Drawer = styled.div<{ isOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 300px;
-  height: 100%;
-  padding-top: 40px;
-  background-color: ${(props) => props.theme.primaryColor};
-  transform: ${(props) => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
-  transition: transform 0.3s ease-in-out;
-`;
+const SubMenu = styled.ul<{ isActive?: boolean }>`  
+  list-style-type: none;  
+  margin: 0;  
+  padding: 0.5rem 0;  
+  background-color: #444;  
+  position: absolute;  
+  top: 100%;  
+  left: 0;  
+  min-width: 200px;  
+  display: ${({ isActive }) => (isActive ? 'block' : 'none')};  
+  z-index: 1;  
+`;  
 
-const SubMenu = styled.div<{ isOpen: boolean }>`
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  padding-left: 16px;
-`;
+const SubMenuItem = styled.li`  
+  padding: 0.5rem 1rem;  
 
-interface PageHeaderComponentProps {}
+  &:hover {  
+    background-color: #555;  
+  }  
+`;  
 
-export const PageHeaderComponent: React.FC<PageHeaderComponentProps> = () => {
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [openedMenus, setOpenedMenus] = useState<{ [key: string]: boolean }>({
-    shop: false,
-    store: false,
-    sales: false,
-  });
+const SubMenuLink = styled.a`  
+  color: #fff;  
+  text-decoration: none;  
+  display: flex;  
+  align-items: center;  
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!isDrawerOpen);
-  };
+  svg {  
+    margin-right: 0.5rem;  
+  }  
+`;  
 
-  const toggleSubMenu = (menu: string) => {
-    setOpenedMenus((prevState) => ({
-      ...prevState,
-      [menu]: !prevState[menu],
-    }));
-  };
-
-  return (
-    <ThemeProvider theme={theme}>
-      <PageHeader>
-        <span onClick={() => toggleSubMenu('shop')}>Shop</span>
-        <SubMenu isOpen={openedMenus.shop}>
-          <p className="sub-menu">Shop Item</p>
-          <p className="sub-menu">Item Input</p>
-          <p className="sub-menu">Item History</p>
-          <p className="sub-menu">Item Move History</p>
-          <p className="sub-menu">Item Balance</p>
-          <p className="sub-menu">Item Balance - All Low in Quantity</p>
-        </SubMenu>
-        <span onClick={() => toggleSubMenu('store')}>Store</span>
-        <SubMenu isOpen={openedMenus.store}>
-          <p className="sub-menu">Main Branch</p>
-          <p className="sub-menu">Request Items</p>
-          <p className="sub-menu">Manage Request</p>
-          <p className="sub-menu">Low in Quantity</p>
-        </SubMenu>
-        <span onClick={() => toggleSubMenu('sales')}>Sales</span>
-        <SubMenu isOpen={openedMenus.sales}>
-          <p className="sub-menu">Item Out</p>
-          <p className="sub-menu">Manage Sales</p>
-          <p className="sub-menu">Sales Report</p>
-          <p className="sub-menu">Sales Filter</p>
-        </SubMenu>
-        <span>Transfer</span>
-        <span>Setting</span>
-        <HamburgerMenu onClick={toggleDrawer}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </HamburgerMenu>
-      </PageHeader>
-      <Drawer isOpen={isDrawerOpen}>
-        <DrawerContent>
-          <p>Shop</p>
-          <p className="sub-menu">Shop Item</p>
-          <p className="sub-menu">Item Input</p>
-          <p className="sub-menu">Item History</p>
-          <p className="sub-menu">Item Move History</p>
-          <p className="sub-menu">Item Balance</p>
-          <p className="sub-menu">Item Balance - All Low in Quantity</p>
-          <p>Store</p>
-          <p className="sub-menu">Main Branch</p>
-          <p className="sub-menu">Request Items</p>
-          <p className="sub-menu">Manage Request</p>
-          <p className="sub-menu">Low in Quantity</p>
-          <p>Sales</p>
-          <p className="sub-menu">Item Out</p>
-          <p className="sub-menu">Manage Sales</p>
-          <p className="sub-menu">Sales Report</p>
-          <p className="sub-menu">Sales Filter</p>
-          <p>Transfer</p>
-          <p className="sub-menu">Add Item in Manage Item</p>
-          <p className="sub-menu">Item In Report</p>
-          <p className="sub-menu">Add Item Out</p>
-          <p className="sub-menu">Manage Item Out</p>
-          <p className="sub-menu">Item Out Report</p>
-          <p>Setting</p>
-        </DrawerContent>
-      </Drawer>
-    </ThemeProvider>
-  );
-};
+export default Navbar;
