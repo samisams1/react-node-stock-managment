@@ -3,7 +3,6 @@ import styled, { ThemeProvider } from 'styled-components';
 import Banner from './Banner';
 import SubMain from './SubMain';
 import SearchComponent from '../../layouts/Search/Search';
-import { PageHeaderComponent } from '../../layouts/PageHeader';
 import SidebarComponent from '../../layouts/Sidebar';
 import Footer from '../../layouts/Footer/footer';
 
@@ -26,7 +25,6 @@ const MainContentWrapper = styled.div`
 const HomePage = () => {
   return (
     <ThemeProvider theme={theme}>
-      <PageHeaderComponent />
     <Content>
       <SidebarComponent/>
         <MainContentWrapper>

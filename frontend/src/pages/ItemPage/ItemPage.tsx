@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { PageHeaderComponent } from '../../layouts/PageHeader';
-import SidebarComponent from '../../layouts/Sidebar';
 import Footer from '../../layouts/Footer/footer';
 import Banner from '../HomePage/Banner';
 import ItemTable from './Item';
@@ -45,7 +44,6 @@ const ItemPage = () => {
     <ThemeProvider theme={theme}>
       <PageHeaderComponent />
       <Content>
-        <SidebarComponent />
         <MainContentWrapper>
       
           <Banner />

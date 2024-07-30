@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import SearchComponent from '../../layouts/Search/Search';
-import { PageHeaderComponent } from '../../layouts/PageHeader';
 import SidebarComponent from '../../layouts/Sidebar';
 import Footer from '../../layouts/Footer/footer';
 import Banner from '../HomePage/Banner';
@@ -41,7 +40,6 @@ const RightColumn = styled.div`
 const LoginPage = () => {
   return (
     <ThemeProvider theme={theme}>
-      <PageHeaderComponent />
     <Content>
       <SidebarComponent/>
         <MainContentWrapper>
