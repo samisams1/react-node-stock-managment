@@ -6,6 +6,20 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegistrationPage/RegisterPage';
 import ItemPage from './pages/ItemPage/ItemPage';
 import SelectedItemDetails from './pages/ItemPage/SelectedItemDetails';
+import Bank from './pages/BankPage/bank';
+import Branch from './pages/Branch/branch';
+import ShopeItem from './pages/ShopePage/shopeItem';
+import ItemInput from './pages/ShopePage/itemInput';
+import ItemHistory from './pages/ShopePage/itemHistory';
+import LowBalance from './pages/ShopePage/lowBalance';
+import ItemBalance from './pages/ShopePage/ItemBalance';
+import ManageSales from './pages/SalesPage/manageSales';
+import SalesReport from './pages/SalesPage/salesReport';
+import SalesFiliter from './pages/SalesPage/salesFiliter';
+import ManageRequest from './pages/StorePage/manageRequest';
+import StoreItem from './pages/StorePage/storetem';
+import MainBranch from './pages/StorePage/mainBranch';
+import LowInQuantity from './pages/StorePage/lowInQuantity';
 
 interface SelectedItem {
   id: string;
@@ -34,6 +48,28 @@ const RouteComponent: React.FC = () => {
     {
       path: '/signin',
       element: <LoginPage />,
+    },
+    {path: '/shope-item',element: <ShopeItem />,},
+    {path: '/item-input',element: <ItemInput />,},
+    {path: '/item-history',element: <ItemHistory />,},
+    {path: '/item-low-quantity',element: <LowBalance />,},
+    {path: '/item-balance',element: <ItemBalance />,},
+
+    {path: '/manage-request',element: <ManageRequest />,},
+    {path: '/item-out',element: <StoreItem />,},
+    {path: '/main-branch',element: <MainBranch />,},
+    {path: '/low-quantity',element: <LowInQuantity />,},
+
+    {path: '/manage-sales',element: <ManageSales />,},
+    {path: '/sales-report',element: <SalesReport />,},
+    {path: '/sales-filiter',element: <SalesFiliter />,},
+    {
+      path: '/bank',
+      element: <Bank />,
+    },
+    {
+      path: '/branch',
+      element: <Branch />,
     },
     {
       path: '/register',

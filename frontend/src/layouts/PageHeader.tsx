@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {  
   FaHome, FaShoppingCart, FaStore, FaExchangeAlt, FaClipboardList, FaMoneyBillAlt, FaCog,  
   FaAngleUp, FaAngleDown, FaUserCircle, FaShippingFast, FaChartLine, FaPeopleArrows,  
-  FaCodeBranch, FaFileImport,  
+  FaCodeBranch, FaFileImport, FaPiggyBank, FaRegFilePowerpoint, FaSearch,  
 } from 'react-icons/fa';  
 
 interface LinkProps {  
@@ -20,18 +20,25 @@ const links: LinkProps[] = [
       { label: 'Shop Item', href: '/shope-item', icon: <FaClipboardList /> },  
       { label: 'Item Input', href: '/item-input', icon: <FaUserCircle /> },  
       { label: 'Item History', href: '/item-history', icon: <FaShippingFast /> },  
-      { label: 'Item Balance', href: '/item-alance', icon: <FaShippingFast /> },  
+      { label: 'Item Balance', href: '/item-balance', icon: <FaShippingFast /> },  
       { label: 'Item Balance - All Low in Quantity', href: '/item-low-quantity', icon: <FaShippingFast /> },  
     ],  
   },  
   {  
-    label: 'Store', href: '/store', icon: <FaStore />, subMenu: [  
-      { label: 'Main Branch', href: '/store/inventory', icon: <FaChartLine /> },  
-      { label: 'Request Items', href: '/store/pricing', icon: <FaMoneyBillAlt /> },  
-      { label: 'Manage Request', href: '/store/analytics', icon: <FaChartLine /> }, 
-      { label: 'Low in Quantity', href: '/store/analytics', icon: <FaChartLine /> },  
+    label: 'Sales', href: '/sales', icon: <FaStore />, subMenu: [  
+      { label: 'Mnage Sales', href: '/manage-sales', icon: <FaChartLine /> },  
+      { label: 'Sales Report', href: '/sales-report', icon: <FaRegFilePowerpoint /> },  
+      { label: 'Sales Filiter', href: '/sales-filiter', icon: <FaSearch /> },  
     ],  
   },  
+  {  
+    label: 'Store', href: '/store', icon: <FaStore />, subMenu: [  
+      { label: 'Item Out', href: '/item-out', icon: <FaChartLine /> },  
+      { label: 'Request Items', href: '/manage-request', icon: <FaMoneyBillAlt /> },  
+      { label: 'Manage Request', href: '/manage-request', icon: <FaChartLine /> }, 
+      { label: 'Low in Quantity', href: '/low-quantity', icon: <FaChartLine /> },  
+    ],  
+  }, 
   {  
     label: 'Transfer', href: '/transfer', icon: <FaExchangeAlt />, subMenu: [  
       { label: 'Bank Accounts', href: '/transfer/accounts', icon: <FaUserCircle /> },  
@@ -58,6 +65,7 @@ const links: LinkProps[] = [
       { label: 'Company Profile', href: '/companyProfile', icon: <FaPeopleArrows /> },  
       { label: 'User Management', href: '/users', icon: <FaPeopleArrows /> },  
       { label: 'Branch', href: '/branch', icon: <FaCodeBranch /> },  
+      { label: 'Bank', href: '/bank', icon: <FaPiggyBank /> },  
       { label: 'Import From Excel', href: '/import', icon: <FaFileImport /> },  
     ],  
   },  
