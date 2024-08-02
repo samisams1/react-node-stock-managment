@@ -4,7 +4,7 @@ import BankControlloer from './controllers';
 const router = express.Router();
 
 
-router.get('/banks', BankControlloer.getAllBanks);
+//router.get('/banks', BankControlloer.getAllBanks);
 
 router.post('/create', (req, res) => {BankControlloer});
 

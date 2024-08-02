@@ -8,7 +8,6 @@ import ItemPage from './pages/ItemPage/ItemPage';
 import SelectedItemDetails from './pages/ItemPage/SelectedItemDetails';
 import Bank from './pages/BankPage/bank';
 import Branch from './pages/Branch/branch';
-import ShopeItem from './pages/ShopePage/shopeItem';
 import ItemInput from './pages/ShopePage/itemInput';
 import ItemHistory from './pages/ShopePage/itemHistory';
 import LowBalance from './pages/ShopePage/lowBalance';
@@ -20,6 +19,7 @@ import ManageRequest from './pages/StorePage/manageRequest';
 import StoreItem from './pages/StorePage/storetem';
 import MainBranch from './pages/StorePage/mainBranch';
 import LowInQuantity from './pages/StorePage/lowInQuantity';
+import ShopItem from './pages/ShopePage/shopeItem';
 
 interface SelectedItem {
   id: string;
@@ -49,7 +49,7 @@ const RouteComponent: React.FC = () => {
       path: '/signin',
       element: <LoginPage />,
     },
-    {path: '/shope-item',element: <ShopeItem />,},
+    {path: '/shope-item',element: <ShopItem />,},
     {path: '/item-input',element: <ItemInput />,},
     {path: '/item-history',element: <ItemHistory />,},
     {path: '/item-low-quantity',element: <LowBalance />,},

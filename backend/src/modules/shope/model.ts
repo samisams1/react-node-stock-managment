@@ -14,6 +14,22 @@ Shope.init({
         type:DataTypes.INTEGER,
         primaryKey:true,
     },
+    item_id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+    },
+    branch_id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+    },
+    quantity:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+    },
+    price:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+    },
     status:{
         type:DataTypes.STRING,
         allowNull:true
