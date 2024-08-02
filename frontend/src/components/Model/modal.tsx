@@ -209,6 +209,6 @@ const SubmitButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #124712;
   }
 `;
