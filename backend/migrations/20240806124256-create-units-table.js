@@ -2,15 +2,20 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('shopes', {
+    await queryInterface.createTable('units', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      status: {
+      name: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
+        unique: true,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -20,12 +25,12 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-    },{
+    }, {
       schema: 'stock_schema',
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('shopes');
+    await queryInterface.dropTable('units');
   },
 };
