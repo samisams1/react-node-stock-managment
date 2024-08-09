@@ -8,8 +8,6 @@ class Payment extends Model {
     public readonly createdAt!:Date;
     public readonly upatedAt!:Date;
 }
-
-
 Payment.init({
     id:{
         type:DataTypes.INTEGER,

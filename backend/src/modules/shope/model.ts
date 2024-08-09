@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/database";
+export interface ShopeAttributes extends Omit<Shope, "id" | "createdAt" | "updatedAt"> {}
 class Shope extends Model {
     public id!:number;
     public item_id!:number;

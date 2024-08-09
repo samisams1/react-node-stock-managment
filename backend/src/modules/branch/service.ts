@@ -15,7 +15,9 @@ class BranchService extends GenericService<Branch> {
 
     return super.create(branch);
   }
-
+  async getAll(): Promise<Branch[]> {
+    return super.getAll();
+  }
   async getById(id: number): Promise<Branch | null> {
     return super.getById(id);
   }

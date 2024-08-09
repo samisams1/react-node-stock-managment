@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from '../../config/database';
+export interface BankAttributes extends Omit<Bank, "id" | "createdAt" | "updatedAt"> {}
 class Bank extends Model {
     public id!: number;
     public title!:string;

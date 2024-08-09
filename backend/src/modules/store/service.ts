@@ -1,12 +1,30 @@
-import Bank from "./model";
-import BankRepository from "./repositories/repositories";
+import GenericService from "../../modules/service/GenericService";
+import Store from './model';
 
-const BankService = {
-  async getAllBanks(): Promise<Bank[]> {
-    return BankRepository.getAllBanks();
-  },
-  async createBank(itemData: Partial<Bank>): Promise<Bank> {
-    return BankRepository.create(itemData);
-  },
-};
-export default BankService;
+class StoreService extends GenericService<Store> {
+  constructor() {
+    super(Store);
+  }
+  async create(store: Partial<Store>): Promise<Store> {
+    // Add any service-specific validation or business logic here
+    if (!store.id) {
+      throw new Error('Store name is required');
+    }
+    return super.create(store);
+  }
+  async getById(id: number): Promise<Store | null> {
+    return super.getById(id);
+  }
+  async updateStore(id: number, store: Partial<Store>): Promise<Store | null> {
+    return super.getById(id);
+  }
+  async deleteStore(id: number): Promise<boolean> {
+    try {
+      await super.delete(id);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+}
+export {StoreService}

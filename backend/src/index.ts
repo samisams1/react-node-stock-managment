@@ -7,6 +7,7 @@ import authoRoutes from './modules/auth/routes';
 import ItemRoutes from './modules/item/routes';
 import ShopeItems from './modules/shope/routes';
 import Branch   from './modules/branch/routes';
+import Store from './modules/store/routes';
 dotenv.config();
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/auth', authoRoutes);
 app.use('/item', ItemRoutes);
 app.use('/shopeItem', ShopeItems);
 app.use('/branch',Branch)
+app.use('/store',Store)
 app.use((err: any, req: Request, res: Response, next: any) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });

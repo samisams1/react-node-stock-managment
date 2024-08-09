@@ -1,11 +1,22 @@
-import express from 'express';
-import BankControlloer from './controllers';
+import express, { Router } from 'express';
+import BranchController from './controllers';
 
-const router = express.Router();
+const router: Router = express.Router();
+const branchController = new BranchController();
 
+// Get all branches
+router.get('/branches', branchController.getAllBanks.bind(branchController));
 
-router.get('/banks', BankControlloer.getAllBanks);
+// Get beanch by Id
+router.get('/branche/:id', branchController.getBankById.bind(branchController));
 
-router.post('/create', (req, res) => {BankControlloer});
+// Create a new branch
+router.post('/branches', branchController.createBank.bind(branchController));
+
+// Update a branch
+router.put('/branche/:id', branchController.updateBank.bind(branchController));
+
+// Delete a branch
+router.delete('/branche/:id', branchController.deleteBank.bind(branchController));
 
 export default router;

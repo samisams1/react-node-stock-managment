@@ -1,12 +1,44 @@
-import Purchase from "./model";
-import PurchaseRepository from "./repositories/repositories";
+import GenericService from '../../modules/service/GenericService';
+import { Op } from 'sequelize';
+import Purchase from './model';
 
-const PurhaseService = {
-  async getAllPurchases(): Promise<Purchase[]> {
-    return PurchaseRepository.getAllPurchases();
-  },
- /* async createBank(itemData: Partial<Bank>): Promise<Purchase> {
-    return PurchaseRepository.crete(itemData);
-  },*/
-};
-export default PurhaseService;
+class BranchService extends GenericService<Purchase> {
+  constructor() {
+    super(Purchase);
+  }
+
+  async create(branch: Partial<Purchase>): Promise<Purchase> {
+    // Add any branch-specific validation or business logic here
+    if (!branch.id) {
+      throw new Error('Branch name is required');
+    }
+
+    return super.create(branch);
+  }
+
+  async getById(id: number): Promise<Purchase | null> {
+    return super.getById(id);
+  }
+
+  async updateBranch(id: number, branch: Partial<Purchase>): Promise<Purchase | null> {
+    // Add any branch-specific validation or business logic here
+    if (!branch.id) {
+      throw new Error('Branch name is required');
+    }
+
+    const updatedBranch = await super.update(id, branch);
+    return updatedBranch;
+  }
+
+  async deleteBranch(id: number): Promise<boolean> {
+    try {
+      await super.delete(id);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+ 
+}
+
+export { BranchService };
