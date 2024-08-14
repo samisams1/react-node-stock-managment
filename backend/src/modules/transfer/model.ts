@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from '../../config/database';
-
+export interface TransferAttributes extends Omit<Transfer, "id" | "createdAt" | "updatedAt"> {}
 class Transfer extends Model {
     public id!:number;
     public status!:number;

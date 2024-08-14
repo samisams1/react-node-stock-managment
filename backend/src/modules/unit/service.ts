@@ -1,27 +1,27 @@
 import GenericService from '../../modules/service/GenericService';
-import Transfer from './model';
+import Unit from './model';
 
-class TransferService extends GenericService<Transfer> {
+class UnitService extends GenericService<Unit> {
   constructor() {
-    super(Transfer);
+    super(Unit);
   }
 
-  async create(branch: Partial<Transfer>): Promise<Transfer> {
+  async create(branch: Partial<Unit>): Promise<Unit> {
     // Add any branch-specific validation or business logic here
-    if (!branch.id) {
-      throw new Error('Branch name is required');
+    if (!branch.name) {
+      throw new Error('Unit name is required');
     }
 
     return super.create(branch);
   }
 
-  async getById(id: number): Promise<Transfer | null> {
+  async getById(id: number): Promise<Unit | null> {
     return super.getById(id);
   }
 
-  async updatetTransfer(id: number, branch: Partial<Transfer>): Promise<Transfer | null> {
+  async updateUint(id: number, branch: Partial<Unit>): Promise<Unit | null> {
     // Add any branch-specific validation or business logic here
-    if (!branch.id) {
+    if (!branch.name) {
       throw new Error('Branch name is required');
     }
 
@@ -29,7 +29,7 @@ class TransferService extends GenericService<Transfer> {
     return updatedBranch;
   }
 
-  async deleteTransfer(id: number): Promise<boolean> {
+  async deleteUnit(id: number): Promise<boolean> {
     try {
       await super.delete(id);
       return true;
@@ -40,4 +40,4 @@ class TransferService extends GenericService<Transfer> {
  
 }
 
-export { TransferService };
+export { UnitService };

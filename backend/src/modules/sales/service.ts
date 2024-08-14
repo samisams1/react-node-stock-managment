@@ -1,6 +1,5 @@
 import GenericService from '../../modules/service/GenericService';
-import { Op } from 'sequelize';
-import Sales from './mode';
+import { Sales } from './mode';
 
 class SalesService extends GenericService<Sales> {
   constructor() {
@@ -20,7 +19,7 @@ class SalesService extends GenericService<Sales> {
     return super.getById(id);
   }
 
-  async updateBranch(id: number, branch: Partial<Sales>): Promise<Sales | null> {
+  async updateSales(id: number, branch: Partial<Sales>): Promise<Sales | null> {
     // Add any branch-specific validation or business logic here
     if (!branch.id) {
       throw new Error('Branch name is required');
@@ -30,7 +29,7 @@ class SalesService extends GenericService<Sales> {
     return updatedBranch;
   }
 
-  async deleteBranch(id: number): Promise<boolean> {
+  async deleteSales(id: number): Promise<boolean> {
     try {
       await super.delete(id);
       return true;

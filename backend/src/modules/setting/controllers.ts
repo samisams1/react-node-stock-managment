@@ -1,28 +1,46 @@
-import SettingService from "./service";
 import { Request, Response } from 'express';
+import { SettingService } from './service';
+import Setting, { SettingAttributes } from './model';
+class SettingController {
+  private settingService: SettingService;
 
-const SettingControlloer  = {
-    async getAllSettings(req:Request,res:Response){
-        try{
-          const   banks = await SettingService.getAllBanks();
-            res.json(banks);
+  constructor() {
+    this.settingService = new SettingService();
+  }
 
-        }catch(error){
-            res.status(500).json({error:'Internal server error'});
-        }
-    },
-    async create(req: Request, res: Response): Promise<Response> {
-        try {
-          const { status } = req.body;
-        const bankData = {
-            status,
-        };
-        const createdProduct = await SettingService.createBank(bankData);
-      return res.status(201).json(createdProduct);
-        } catch (error) {
-          console.error(error); // Log the error message to the console
-        return res.status(500).json({ error: 'Failed to create product' });
-        }
-      },
+  async getAllSettings(req: Request, res: Response): Promise<void> {
+    const branches = await this.settingService.getAll();
+    res.json(branches);
+  }
+
+  async getSettingById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const branch = await this.settingService.getById(Number(id));
+    if (!branch) {
+      res.status(404).json({ message: 'Branch not found' });
+    } else {
+      res.json(branch);
+    }
+  }
+
+  async createSetting(req: Request, res: Response): Promise<void> {
+    const data: SettingAttributes = req.body;
+    const newBranch = await this.settingService.create(data);
+    res.status(201).json(newBranch);
+  }
+
+  async updateSetting(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const data: Partial<Setting> = req.body;
+    const updatedBranch = await this.settingService.update(Number(id), data);
+    res.json(updatedBranch);
+  }
+
+  async deleteSetting(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    await this.settingService.deleteSetting(Number(id));
+    res.status(204).end();
+  }
 }
-export default SettingControlloer;
+
+export default SettingController;

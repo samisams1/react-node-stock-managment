@@ -1,11 +1,22 @@
-import express from 'express';
-import BankControlloer from './controllers';
+import express, { Router } from 'express';
+import PurchaseController from './controllers';
 
-const router = express.Router();
+const router: Router = express.Router();
+const purchaseController = new PurchaseController();
 
+// Get all shopespurchaseController
+router.get('/branches', purchaseController.getAllPurchases.bind(purchaseController));
 
-router.get('/banks', BankControlloer.getAllBanks);
+// Get beanch by Id
+router.get('/branche/:id', purchaseController.getPurchaseById.bind(purchaseController));
 
-router.post('/create', (req, res) => {BankControlloer});
+// Create a new shope
+router.post('/branches', purchaseController.createPurchase.bind(purchaseController));
+
+// Update a shope
+router.put('/branche/:id', purchaseController.updatePurchase.bind(purchaseController));
+
+// Delete a shope
+router.delete('/branche/:id', purchaseController.deletePurchase.bind(purchaseController));
 
 export default router;

@@ -1,8 +1,8 @@
 import GenericService from '../../modules/service/GenericService';
-import { Op } from 'sequelize';
-import Purchase from './model';
+import { Purchase } from './model';
+//import Purchase from './model';
 
-class BranchService extends GenericService<Purchase> {
+class PurchaseService extends GenericService<Purchase> {
   constructor() {
     super(Purchase);
   }
@@ -41,4 +41,4 @@ class BranchService extends GenericService<Purchase> {
  
 }
 
-export { BranchService };
+export { PurchaseService };

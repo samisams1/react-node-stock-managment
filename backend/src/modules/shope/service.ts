@@ -6,7 +6,7 @@ class ShopeService extends GenericService<Shope> {
     super(Shope)
   }
   async create(shope: Partial<Shope>): Promise<Shope> {
-    if(!shope.id){
+    if(!shope.itemId){
       throw new Error('Shope is required')
     }
     return super.create(shope);

@@ -37,7 +37,7 @@ User.init(
     modelName: 'User',
     tableName: 'users',
     timestamps: true,
-    schema: 'autoepcrepair',
+    schema: 'stock_schema',
     
   }
 );

@@ -1,15 +1,19 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors'; // Import the cors package
-
 import userRoutes from './modules/user/routes';
 import authoRoutes from './modules/auth/routes';
 import ItemRoutes from './modules/item/routes';
 import ShopeItems from './modules/shope/routes';
 import Branch   from './modules/branch/routes';
 import Store from './modules/store/routes';
-dotenv.config();
+import Sales from './modules/sales/routes';
+import Purchase from './modules/purchase/routes';
+import Payment from './modules/payment/routes';
+import Quantity from './modules/quantity/routes';
+import Unit from './modules/unit/routes';
 
+dotenv.config();
 const app = express();
 app.use(express.json());
 
@@ -21,8 +25,13 @@ app.use('/users', userRoutes);
 app.use('/auth', authoRoutes);
 app.use('/item', ItemRoutes);
 app.use('/shopeItem', ShopeItems);
-app.use('/branch',Branch)
-app.use('/store',Store)
+app.use('/branch',Branch);
+app.use('/store',Store);
+app.use('sales',Sales);
+app.use('/purchase',Purchase);
+app.use('/payment',Payment);
+app.use('/quantity',Quantity);
+app.use('/unit',Unit);
 app.use((err: any, req: Request, res: Response, next: any) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });

@@ -1,22 +1,22 @@
 import express, { Router } from 'express';
-import BranchController from './controllers';
+import SalesController from './controllers';
 
 const router: Router = express.Router();
-const branchController = new BranchController();
+const salesController = new SalesController();
 
 // Get all branches
-router.get('/branches', branchController.getAllSales.bind(branchController));
+router.get('/saleses', salesController.getAllSales.bind(salesController));
 
 // Get beanch by Id
-router.get('/branche/:id', branchController.getSalesById.bind(branchController));
+router.get('/sales/:id', salesController.getSalesById.bind(salesController));
 
 // Create a new branch
-router.post('/branches', branchController.createSales.bind(branchController));
+router.post('/sales', salesController.createSales.bind(salesController));
 
 // Update a branch
-router.put('/branche/:id', branchController.updateSales.bind(branchController));
+router.put('/sales/:id', salesController.updateSales.bind(salesController));
 
 // Delete a branch
-router.delete('/branche/:id', branchController.deleteSales.bind(branchController));
+router.delete('/sales/:id', salesController.deleteSales.bind(salesController));
 
 export default router;

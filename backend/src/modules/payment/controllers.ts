@@ -1,27 +1,47 @@
-import PaymentService from "./service";
 import { Request, Response } from 'express';
+import { PaymentService } from './service';
+import Payment from './model';
+export interface PaymentAttributes extends Omit<Payment, "id" | "createdAt" | "updatedAt"> {}
+class PaymentController {
+  private paymentService: PaymentService;
 
-const PaymentControlloer  = {
-    async getAllPayments(req:Request,res:Response){
-        try{
-          const   banks = await PaymentService.getAllPayments();
-            res.json(banks);
-        }catch(error){
-            res.status(500).json({error:'Internal server error'});
-        }
-    },
-    async createPayment(req: Request, res: Response): Promise<Response> {
-        try {
-          const { status } = req.body;
-        const bankData = {
-            status,
-        };
-        const createdProduct = await PaymentService.createPayment(bankData);
-      return res.status(201).json(createdProduct);
-        } catch (error) {
-          console.error(error); // Log the error message to the console
-        return res.status(500).json({ error: 'Failed to create product' });
-        }
-      },
+  constructor() {
+    this.paymentService = new PaymentService();
+  }
+
+  async getAllPayments(req: Request, res: Response): Promise<void> {
+    const branches = await this.paymentService.getAll();
+    res.json(branches);
+  }
+
+  async getPaymentById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const branch = await this.paymentService.getById(Number(id));
+    if (!branch) {
+      res.status(404).json({ message: 'Branch not found' });
+    } else {
+      res.json(branch);
+    }
+  }
+
+  async createPayment(req: Request, res: Response): Promise<void> {
+    const data: PaymentAttributes = req.body;
+    const newBranch = await this.paymentService.create(data);
+    res.status(201).json(newBranch);
+  }
+
+  async updatePayment(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const data: Partial<Payment> = req.body;
+    const updatedBranch = await this.paymentService.updatePayment(Number(id), data);
+    res.json(updatedBranch);
+  }
+
+  async deletePayment(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    await this.paymentService.deletePayment(Number(id));
+    res.status(204).end();
+  }
 }
-export default PaymentControlloer;
+
+export default PaymentController;

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { SalesService } from './service';
-import Sales, { SalesAttributes } from './mode';
+import  { Sales, SalesAttributes } from './mode';
 
 class SalesController {
   private salesService: SalesService;
@@ -33,13 +33,13 @@ class SalesController {
   async updateSales(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const data: Partial<Sales> = req.body;
-    const updatedBranch = await this.salesService.updateBranch(Number(id), data);
+    const updatedBranch = await this.salesService.updateSales(Number(id), data);
     res.json(updatedBranch);
   }
 
   async deleteSales(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    await this.salesService.deleteBranch(Number(id));
+    await this.salesService.deleteSales(Number(id));
     res.status(204).end();
   }
 }

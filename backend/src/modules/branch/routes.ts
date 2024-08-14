@@ -11,7 +11,7 @@ router.get('/branches', branchController.getAllBranches.bind(branchController));
 router.get('/branche/:id', branchController.getBranchById.bind(branchController));
 
 // Create a new branch
-router.post('/branches', branchController.createBranch.bind(branchController));
+router.post('/create', branchController.createBranch.bind(branchController));
 
 // Update a branch
 router.put('/branche/:id', branchController.updateBranch.bind(branchController));
